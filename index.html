@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>React Tutorial</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/babel">
+
+      var $content = document.getElementById('content');
+
+      const STATES = {
+        "AL": "Montgomery",
+        "AK": "Juneau",
+        "AS": "Pago Pago",
+        "AZ": "Phoenix",
+        "AR": "Little Rock",
+        "CA": "Sacramento",
+        "CO": "Denver",
+        "CT": "Hartford",
+        "DE": "Dover",
+        "DC": "District Of Columbia",
+        "FM": "Palikir",
+        "FL": "Tallahassee",
+        "GA": "Atlanta",
+        "GU": "Hagåtña",
+        "HI": "Honolulu",
+        "ID": "Idaho",
+        "IL": "Boise",
+        "IN": "Indianapolis",
+        "IA": "Des Moines",
+        "KS": "Topeka",
+        "KY": "Frankfort",
+        "LA": "Baton Rouge",
+        "ME": "Augusta",
+        "MH": "Majuro",
+        "MD": "Annapolis",
+        "MA": "Boston",
+        "MI": "Lansing",
+        "MN": "Saint Paul",
+        "MS": "Jackson",
+        "MO": "Jefferson City",
+        "MT": "Helena",
+        "NE": "Lincoln",
+        "NV": "Carson City",
+        "NH": "Concord",
+        "NJ": "Trenton",
+        "NM": "Santa Fe",
+        "NY": "Albany",
+        "NC": "Raleigh",
+        "ND": "Bismarck",
+        "MP": "Saipan",
+        "OH": "Columbus",
+        "OK": "Oklahoma City",
+        "OR": "Salem",
+        "PW": "Palau",
+        "PA": "Harrisburg",
+        "PR": "San Juan",
+        "RI": "Providence",
+        "SC": "Columbia",
+        "SD": "Pierre",
+        "TN": "Nashville",
+        "TX": "Austin",
+        "UT": "Salt Lake City",
+        "VT": "Montpelier",
+        "VI": "Charlotte Amalie",
+        "VA": "Richmond",
+        "WA": "Olympia",
+        "WV": "Charleston",
+        "WI": "Madison",
+        "WY": "Cheyenne"
+      };
+
+      const STATESARRAY = $.map(STATES, function(value, index) {
+        return [[value, index]];
+      });
+
+      // FUNCTIONS
+
+      function shuffle(a) {
+        var j, x, i;
+        for (i = a.length; i; i -= 1) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
+        } 
+        return a;
+      }
+
+      function generateRandomAnswers() {
+        var options = [];
+        var i = 0;
+        for (let el of shuffle(STATESARRAY)) {
+          options.push(<li key={el}>{el[0]}</li>);
+          i++;
+          if(i === 4) break;
+        }
+        return options;
+      }
+
+
+      // COMPONENTS
+      var Option = React.createClass({
+        render: function() {
+          return( 
+            <li>{shuffle(STATESARRAY)[0][0]}</li>
+          )
+        }
+      });
+
+      var Question = React.createClass({
+        render: function() {
+          return (
+            <div className="Question">
+              <ul className="List">
+                <Option />
+                <Option />
+                <Option />
+                <Option />
+              </ul>
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <Question />,
+        $content
+      );
+
+    </script>
+  </body>
+</html>
