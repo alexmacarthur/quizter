@@ -6,7 +6,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
   </head>
   <body>
@@ -15,7 +14,12 @@
 
       var $content = document.getElementById('content');
 
-      const STATES = {
+      const SCORE = {
+        correct: 0,
+        incorrect: 0
+      }
+
+      const ANSWERS = {
         "AL": "Montgomery",
         "AK": "Juneau",
         "AS": "Pago Pago",
@@ -77,11 +81,17 @@
         "WY": "Cheyenne"
       };
 
-      const STATESARRAY = $.map(STATES, function(value, index) {
-        return [[value, index]];
-      });
+      const ARRAY = [];
 
-      // FUNCTIONS
+      const NUM_ITEMS = Object.keys(ANSWERS).length;
+
+      function processAnswers() {
+        var i = 0;
+        for(var key in ANSWERS){
+          ARRAY[i] = [key, ANSWERS[key]];
+          i++;
+        }
+      }
 
       function shuffle(a) {
         var j, x, i;
@@ -94,46 +104,63 @@
         return a;
       }
 
-      function generateRandomAnswers() {
-        var options = [];
-        var i = 0;
-        for (let el of shuffle(STATESARRAY)) {
-          options.push(<li key={el}>{el[0]}</li>);
-          i++;
-          if(i === 4) break;
-        }
-        return options;
+      function newQuestion() {
+        ReactDOM.render(
+          <Components.Question/>,
+          $content
+        );
       }
 
+      var Components = {
+        Question : React.createClass({
 
-      // COMPONENTS
-      var Option = React.createClass({
-        render: function() {
-          return( 
-            <li>{shuffle(STATESARRAY)[0][0]}</li>
-          )
-        }
-      });
+          getDefaultProps : function() {
+            var rand = Math.floor(Math.random() * NUM_ITEMS);
+            return {
+              index: rand,
+              state: ARRAY[rand][0]
+            }
+          },
 
-      var Question = React.createClass({
-        render: function() {
-          return (
-            <div className="Question">
-              <ul className="List">
-                <Option />
-                <Option />
-                <Option />
-                <Option />
-              </ul>
-            </div>
-          );
-        }
-      });
+          handleClick: function(e) {
+            if(e.target.getAttribute('data-state') === this.props.state) {
+              SCORE.correct++;
+            } else {
+              SCORE.incorrect++;
+            }
 
-      ReactDOM.render(
-        <Question />,
-        $content
-      );
+            console.log(SCORE);
+
+            newQuestion();
+          },
+
+          render: function() {  
+
+            var correctOption = [ARRAY[this.props.index]];
+            var cleanedArray = ARRAY.slice();
+            cleanedArray.splice(this.props.index, 1);
+            var otherOptions = shuffle(cleanedArray).slice(0, 3);
+            var options = shuffle(correctOption.concat(otherOptions));
+            this.props.state = ARRAY[this.props.index][0];
+
+            return (
+              <div className="Question">
+                {this.props.state}
+                <ul className="List">
+
+                  {options.map(function(item) {
+                    return <li data-state={item[0]} onClick={this.handleClick} key={item[1]}>{item[1]}</li>;
+                  }.bind(this))}
+
+                </ul>
+              </div>
+            );
+          }
+        })
+      }
+
+      processAnswers();
+      newQuestion();
 
     </script>
   </body>
