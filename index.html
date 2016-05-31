@@ -105,22 +105,18 @@
       }
 
       function newQuestion() {
+        var rand = Math.floor(Math.random() * NUM_ITEMS);
+        var state = ARRAY[rand][0];
+
         ReactDOM.render(
-          <Components.Question/>,
+          <Components.Question index={rand} state={state}/>,
           $content
         );
       }
 
       var Components = {
-        Question : React.createClass({
 
-          getDefaultProps : function() {
-            var rand = Math.floor(Math.random() * NUM_ITEMS);
-            return {
-              index: rand,
-              state: ARRAY[rand][0]
-            }
-          },
+        Question : React.createClass({
 
           handleClick: function(e) {
             if(e.target.getAttribute('data-state') === this.props.state) {
@@ -141,7 +137,6 @@
             cleanedArray.splice(this.props.index, 1);
             var otherOptions = shuffle(cleanedArray).slice(0, 3);
             var options = shuffle(correctOption.concat(otherOptions));
-            this.props.state = ARRAY[this.props.index][0];
 
             return (
               <div className="Question">
