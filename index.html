@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>React Tutorial</title>
+    <title>Quizter</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
@@ -11,7 +11,6 @@
   <body>
     <div id="content"></div>
     <script type="text/babel">
-
       var $content = document.getElementById('content');
 
       const SCORE = {
@@ -104,43 +103,56 @@
         return a;
       }
 
-      function newQuestion() {
-        var rand = Math.floor(Math.random() * NUM_ITEMS);
-        var state = ARRAY[rand][0];
-
-        ReactDOM.render(
-          <Components.Question index={rand} state={state}/>,
-          $content
-        );
+      function getRandomIndex() {
+        return Math.floor(Math.random() * NUM_ITEMS);
       }
 
       var Components = {
 
         Question : React.createClass({
 
+          getInitialState : function() {
+            var rand = getRandomIndex();
+
+            return {
+              index : rand,
+              state : ARRAY[rand][0]
+            }
+          },
+
           handleClick: function(e) {
-            if(e.target.getAttribute('data-state') === this.props.state) {
+            if(e.target.getAttribute('data-state') === this.state.state) {
               SCORE.correct++;
+
+              window.updateTimer();
+
             } else {
               SCORE.incorrect++;
             }
 
+            // show the score
             console.log(SCORE);
 
-            newQuestion();
+            // update component with new question
+            var rand = Math.floor(Math.random() * NUM_ITEMS);
+            this.setState({
+              index: rand,
+              state : ARRAY[rand][0]
+            });
+
           },
 
           render: function() {  
 
-            var correctOption = [ARRAY[this.props.index]];
+            var correctOption = [ARRAY[this.state.index]]; 
             var cleanedArray = ARRAY.slice();
-            cleanedArray.splice(this.props.index, 1);
+            cleanedArray.splice(this.state.index, 1);
             var otherOptions = shuffle(cleanedArray).slice(0, 3);
             var options = shuffle(correctOption.concat(otherOptions));
 
             return (
               <div className="Question">
-                {this.props.state}
+                {this.state.state}
                 <ul className="List">
 
                   {options.map(function(item) {
@@ -151,11 +163,64 @@
               </div>
             );
           }
+        }), 
+
+        Timer : React.createClass({
+
+          getInitialState: function() {
+            return {
+              count: 30000,
+              interval: setInterval(this.countdown, 1000)
+            };
+          },
+
+          componentWillMount : function() {
+
+            window.updateTimer = (time) => {
+              var newTime = this.state.count + 5000;
+              this.setState({
+                count: newTime}
+              );
+            }
+          },
+
+          countdown : function() {
+            this.setState({count: this.state.count - 1000});
+
+            if (this.state.count <= 0) {
+              clearInterval(this.state.interval);
+              return;
+            }
+          },
+
+          render: function() {
+            return ( 
+              <div className="Countdown">
+                <span>Time Remaining: </span>
+                <span id="seconds">{this.state.count/1000}</span>
+              </div>
+            )
+          }
+        }),
+
+        Container : React.createClass({
+          render : function() {
+            return (
+              <div className="Wrapper">
+                <Components.Question/>
+                <Components.Timer/>
+              </div>
+            )
+          }
         })
       }
 
       processAnswers();
-      newQuestion();
+
+      window.app = ReactDOM.render(
+        <Components.Container/>,
+        $content
+      );
 
     </script>
   </body>
