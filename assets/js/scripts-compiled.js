@@ -206,10 +206,44 @@ var Components = {
     }
   }),
 
+  FinishScreen: React.createClass({
+    displayName: "FinishScreen",
+
+    componentWillMount: function componentWillMount() {
+      var _this2 = this;
+
+      window.updateTimer = function (time) {
+        var newTime = _this2.state.count + 5000;
+        _this2.setState({
+          count: newTime });
+      };
+    },
+
+    render: function render() {
+      return React.createElement(
+        "div",
+        { className: "FinishScreen" },
+        React.createElement(
+          "h2",
+          null,
+          "You are finished!"
+        ),
+        React.createElement(
+          "span",
+          null,
+          "Your final score is: ",
+          SCORE
+        )
+      );
+    }
+  }),
+
   Container: React.createClass({
     displayName: "Container",
 
     render: function render() {
+
+      alert('more success!');
       return React.createElement(
         "div",
         { className: "Wrapper" },

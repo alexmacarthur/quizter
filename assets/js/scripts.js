@@ -162,7 +162,6 @@ var Components = {
     },
 
     componentWillMount : function() {
-
       window.updateTimer = (time) => {
         var newTime = this.state.count + 5000;
         this.setState({
@@ -190,8 +189,30 @@ var Components = {
     }
   }),
 
+  FinishScreen : React.createClass({
+    componentWillMount : function() {
+      window.updateTimer = (time) => {
+        var newTime = this.state.count + 5000;
+        this.setState({
+          count: newTime}
+        );
+      }
+    }, 
+
+    render : function() {
+      return (
+        <div className="FinishScreen">
+          <h2>You are finished!</h2>
+          <span>Your final score is: {SCORE}</span>
+        </div>
+      )
+    }
+  }),
+
   Container : React.createClass({
     render : function() {
+
+      alert('more success!');
       return (
         <div className="Wrapper">
           <Components.Question/>
