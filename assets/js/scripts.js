@@ -1,5 +1,3 @@
-var $content = document.getElementById('content');
-
 const SCORE = {
   correct: 0,
   incorrect: 0
@@ -71,6 +69,8 @@ const ARRAY = [];
 
 const NUM_ITEMS = Object.keys(ANSWERS).length;
 
+var $content = document.getElementById('content');
+
 function processAnswers() {
   var i = 0;
   for(var key in ANSWERS){
@@ -118,7 +118,8 @@ var Components = {
       }
 
       // show the score
-      console.log(SCORE);
+      console.log('Correct: ' + SCORE.correct);
+      console.log('Incorrect: ' + SCORE.incorrect);
 
       // update component with new question
       var rand = Math.floor(Math.random() * NUM_ITEMS);
@@ -190,20 +191,16 @@ var Components = {
   }),
 
   FinishScreen : React.createClass({
-    componentWillMount : function() {
-      window.updateTimer = (time) => {
-        var newTime = this.state.count + 5000;
-        this.setState({
-          count: newTime}
-        );
-      }
-    }, 
+
+    calculateScore : function() {
+      return this.props.correct;
+    },
 
     render : function() {
       return (
         <div className="FinishScreen">
           <h2>You are finished!</h2>
-          <span>Your final score is: {SCORE}</span>
+          <span>Your final score is: {this.calculateScore()}</span>
         </div>
       )
     }
@@ -211,12 +208,11 @@ var Components = {
 
   Container : React.createClass({
     render : function() {
-
-      alert('more success!');
       return (
         <div className="Wrapper">
           <Components.Question/>
           <Components.Timer/>
+          <Components.FinishScreen correct={SCORE.correct} incorrect={SCORE.incorrect}/>
         </div>
       )
     }

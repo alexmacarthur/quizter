@@ -1,7 +1,5 @@
 "use strict";
 
-var $content = document.getElementById('content');
-
 var SCORE = {
   correct: 0,
   incorrect: 0
@@ -73,6 +71,8 @@ var ARRAY = [];
 
 var NUM_ITEMS = Object.keys(ANSWERS).length;
 
+var $content = document.getElementById('content');
+
 function processAnswers() {
   var i = 0;
   for (var key in ANSWERS) {
@@ -121,7 +121,8 @@ var Components = {
       }
 
       // show the score
-      console.log(SCORE);
+      console.log('Correct: ' + SCORE.correct);
+      console.log('Incorrect: ' + SCORE.incorrect);
 
       // update component with new question
       var rand = Math.floor(Math.random() * NUM_ITEMS);
@@ -209,14 +210,9 @@ var Components = {
   FinishScreen: React.createClass({
     displayName: "FinishScreen",
 
-    componentWillMount: function componentWillMount() {
-      var _this2 = this;
 
-      window.updateTimer = function (time) {
-        var newTime = _this2.state.count + 5000;
-        _this2.setState({
-          count: newTime });
-      };
+    calculateScore: function calculateScore() {
+      return this.props.correct;
     },
 
     render: function render() {
@@ -232,7 +228,7 @@ var Components = {
           "span",
           null,
           "Your final score is: ",
-          SCORE
+          this.calculateScore()
         )
       );
     }
@@ -242,13 +238,12 @@ var Components = {
     displayName: "Container",
 
     render: function render() {
-
-      alert('more success!');
       return React.createElement(
         "div",
         { className: "Wrapper" },
         React.createElement(Components.Question, null),
-        React.createElement(Components.Timer, null)
+        React.createElement(Components.Timer, null),
+        React.createElement(Components.FinishScreen, { correct: SCORE.correct, incorrect: SCORE.incorrect })
       );
     }
   })
