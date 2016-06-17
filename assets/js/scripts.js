@@ -192,6 +192,19 @@ var Components = {
 
   FinishScreen : React.createClass({
 
+    componentDidMount : function() {
+
+      // var elem = ReactDOM.findDOMNode(this);
+
+      // elem.style.opacity = 0;
+
+      // window.requestAnimationFrame(function() {
+      //     elem.style.transition = "opacity 2500ms";
+      //     elem.style.opacity = 1;
+      // });
+
+    },
+
     calculateScore : function() {
       return this.props.correct;
     },

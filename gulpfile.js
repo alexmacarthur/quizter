@@ -44,10 +44,10 @@ gulp.task('uglify', function() {
 });
 
 gulp.task('sass',function(){
-  return gulp.src('assets/sass/style.scss')
+  return gulp.src('assets/scss/style.scss')
     .pipe(sass({outputStyle: 'compressed'}))
     .pipe(autoprefix('last 3 versions'))
-    .pipe(gulp.dest('../css'));
+    .pipe(gulp.dest('assets/css'));
 });
 
 gulp.task('default', ['browserSync'], function() {

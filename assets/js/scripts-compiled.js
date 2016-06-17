@@ -211,6 +211,19 @@ var Components = {
     displayName: "FinishScreen",
 
 
+    componentDidMount: function componentDidMount() {
+
+      // var elem = ReactDOM.findDOMNode(this);
+
+      // elem.style.opacity = 0;
+
+      // window.requestAnimationFrame(function() {
+      //     elem.style.transition = "opacity 2500ms";
+      //     elem.style.opacity = 1;
+      // });
+
+    },
+
     calculateScore: function calculateScore() {
       return this.props.correct;
     },
