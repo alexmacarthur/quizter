@@ -1,15 +1,16 @@
-import React from 'react';
-import { SCORE, NUM_ITEMS, ARRAY } from '../utils/constants.js';
+import React, { Component } from 'react';
+import { SCORE, NUM_ITEMS, ARRAY } from 'app/utils/constants.js';
+import { getRandomIndex } from 'app/utils/functions';
 
-class Question extends React.component {
-  
-  getInitialState () {
-    var rand = this.getRandomIndex();
+class Question extends Component {
 
-    return {
+  constructor(props) {
+    super(props);
+    let rand = getRandomIndex();
+    this.state = {
       index : rand,
       state : ARRAY[rand][0]
-    }
+    };
   }
 
   shuffle(a) {
@@ -21,10 +22,6 @@ class Question extends React.component {
         a[j] = x;
     } 
     return a;
-  }
-
-  getRandomIndex () {
-    return Math.floor(Math.random() * NUM_ITEMS);
   }
 
   handleClic(e) {

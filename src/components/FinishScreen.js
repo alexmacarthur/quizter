@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class FinishScreen extends React.component {
+class FinishScreen extends Component {
   
   componentDidMount() {
 
@@ -22,7 +22,7 @@ class FinishScreen extends React.component {
   render() {
     return (
       <div className="FinishScreen">
-        <h2>You are finished!</h2>
+        <h2>You are NOT finished!</h2>
         <span>Your final score is: {this.calculateScore()}</span>
       </div>
     )
