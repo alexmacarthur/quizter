@@ -2,32 +2,32 @@ import React from 'react';
 
 class Timer extends React.component {
   
-  getInitialState: function() {
+  getInitialState() {
     return {
       count: 30000,
       interval: setInterval(this.countdown, 1000)
     };
-  },
+  }
 
-  componentWillMount : function() {
+  componentWillMount() {
     window.updateTimer = (time) => {
       var newTime = this.state.count + 5000;
       this.setState({
         count: newTime}
       );
     }
-  },
+  }
 
-  countdown : function() {
+  countdown() {
     this.setState({count: this.state.count - 1000});
 
     if (this.state.count <= 0) {
       clearInterval(this.state.interval);
       return;
     }
-  },
+  }
 
-  render: function() {
+  render() {
     return ( 
       <div className="Countdown">
         <span>Time Remaining: </span>
@@ -36,3 +36,4 @@ class Timer extends React.component {
     )
   }
 }
+export default Timer;

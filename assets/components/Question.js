@@ -1,17 +1,18 @@
 import React from 'react';
+import { SCORE, NUM_ITEMS, ARRAY } from '../utils/constants.js';
 
 class Question extends React.component {
   
-  getInitialState : function() {
+  getInitialState () {
     var rand = this.getRandomIndex();
 
     return {
       index : rand,
       state : ARRAY[rand][0]
     }
-  },
+  }
 
-  shuffle : function(a) {
+  shuffle(a) {
     var j, x, i;
     for (i = a.length; i; i -= 1) {
         j = Math.floor(Math.random() * i);
@@ -20,13 +21,13 @@ class Question extends React.component {
         a[j] = x;
     } 
     return a;
-  },
+  }
 
-  getRandomIndex : function() {
+  getRandomIndex () {
     return Math.floor(Math.random() * NUM_ITEMS);
-  },
+  }
 
-  handleClick: function(e) {
+  handleClic(e) {
     if(e.target.getAttribute('data-state') === this.state.state) {
       SCORE.correct++;
 
@@ -47,9 +48,9 @@ class Question extends React.component {
       state : ARRAY[rand][0]
     });
 
-  },
+  }
 
-  render: function() {  
+  render() {  
 
     var correctOption = [ARRAY[this.state.index]]; 
     var cleanedArray = ARRAY.slice();
@@ -71,3 +72,5 @@ class Question extends React.component {
     );
   }
 }
+
+export default Question;

@@ -2,7 +2,7 @@ import React from 'react';
 
 class FinishScreen extends React.component {
   
-  componentDidMount : function() {
+  componentDidMount() {
 
     // var elem = ReactDOM.findDOMNode(this);
 
@@ -13,13 +13,13 @@ class FinishScreen extends React.component {
     //     elem.style.opacity = 1;
     // });
 
-  },
+  }
 
-  calculateScore : function() {
+  calculateScore() {
     return this.props.correct;
-  },
+  }
 
-  render : function() {
+  render() {
     return (
       <div className="FinishScreen">
         <h2>You are finished!</h2>
@@ -29,3 +29,5 @@ class FinishScreen extends React.component {
   }
 
 }
+
+export default FinishScreen;
