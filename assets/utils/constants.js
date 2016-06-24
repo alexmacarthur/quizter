@@ -68,3 +68,13 @@ export const ANSWERS = {
 export const ARRAY = [];
 
 export const NUM_ITEMS = Object.keys(ANSWERS).length;
+
+function processAnswers() {
+  var i = 0;
+  for(var key in ANSWERS){
+    ARRAY[i] = [key, ANSWERS[key]];
+    i++;
+  }
+}
+
+processAnswers();
