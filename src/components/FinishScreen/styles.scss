@@ -1,0 +1,7 @@
+@mixin FinishScreen {
+	background: red;
+}
+
+.FinishScreen {
+	@include FinishScreen;
+}

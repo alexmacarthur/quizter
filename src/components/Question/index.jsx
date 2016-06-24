@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
+
 import { SCORE, NUM_ITEMS, ARRAY } from 'app/utils/constants.js';
 import { getRandomIndex } from 'app/utils/functions';
+
+import styles from './styles.scss';
 
 class Question extends Component {
 
@@ -56,7 +60,7 @@ class Question extends Component {
     var options = this.shuffle(correctOption.concat(otherOptions));
 
     return (
-      <div className="Question">
+      <div className={classnames(styles.Question, this.props.className)}>
         {this.state.state}
         <ul className="List">
 

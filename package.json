@@ -9,7 +9,8 @@
   },
   "keywords": [],
   "scripts": {
-    "start": "webpack",
+    "start": "node server.js",
+    "build": "webpack",
     "serve": "browser-sync start --server --files 'scripts-compiled.js'",
     "watch:js": "onchange '*.js' -- npm run compile"
   },
@@ -24,6 +25,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
     "browser-sync": "^2.13.0",
+    "classnames": "^2.2.5",
     "css-loader": "^0.23.1",
     "html-webpack-plugin": "^2.21.0",
     "node-sass": "^3.8.0",

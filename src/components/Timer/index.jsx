@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
+
 import { getRandomIndex } from 'app/utils/functions';
 import { ARRAY } from 'app/utils/constants'; 
+
+import styles from './styles.scss';
 
 class Timer extends Component {
   constructor(props) {
@@ -8,12 +12,12 @@ class Timer extends Component {
 
     this.state = {
       count: 30000,
-      interval: setInterval(this.countdown, 1000)
+    //   interval: setInterval(this.countdown, 1000)
     };
   }
 
   componentWillMount() {
-    window.updateTimer = ::this.updateTimer;
+    // window.updateTimer = ::this.updateTimer;
   }
 
   updateTimer(time) {

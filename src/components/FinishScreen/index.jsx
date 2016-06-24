@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
+
+import styles from './styles.scss';
 
 class FinishScreen extends Component {
-  
   componentDidMount() {
 
     // var elem = ReactDOM.findDOMNode(this);
@@ -21,8 +23,8 @@ class FinishScreen extends Component {
 
   render() {
     return (
-      <div className="FinishScreen">
-        <h2>You are NOT finished!</h2>
+      <div className={classnames(this.props.className, styles.FinishScreen)}>
+        <h2>You are finished!</h2>
         <span>Your final score is: {this.calculateScore()}</span>
       </div>
     )

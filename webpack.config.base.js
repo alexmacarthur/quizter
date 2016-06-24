@@ -29,7 +29,7 @@ var scssLoader = {
   test: /\.scss$/,
   loaders: [
     'style',
-    'css-loader?modules&importLoaders=1&localIdentName=[local]-[hash:base64:4]',
+    'css-loader?insertAt=top&modules&importLoaders=1&localIdentName=[local]-[hash:base64:4]',
     'sass'
   ],
   exclude: /node_modules/

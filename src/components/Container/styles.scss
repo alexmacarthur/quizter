@@ -1,0 +1,11 @@
+@mixin Container {
+	border: 1px solid green;
+}
+
+.Container {
+	@include Container;
+}
+
+.Question {
+	color: red;
+}
