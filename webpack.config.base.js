@@ -3,12 +3,6 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// var babelLoader = {
-//   test: /\.jsx?$/,
-//   loaders: ['babel-loader'],
-//   exclude: /node_modules/
-// };
-
 var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: path.resolve('src', 'index.html'),
   filename: 'index.html',

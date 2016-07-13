@@ -7,7 +7,7 @@ import classnames from 'classnames';
 
 import styles from './styles.scss';
 
-class Container extends Component {
+export default class Container extends Component {
 	
   render() {
     return (
@@ -19,5 +19,3 @@ class Container extends Component {
     )
   }
 }
-
-export default Container;

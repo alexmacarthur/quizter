@@ -6,15 +6,19 @@ import { getRandomIndex } from 'app/utils/functions';
 
 import styles from './styles.scss';
 
-class Question extends Component {
+export default class Question extends Component {
 
   constructor(props) {
     super(props);
+
     let rand = getRandomIndex();
+
     this.state = {
       index : rand,
       state : ARRAY[rand][0]
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   shuffle(a) {
@@ -28,7 +32,7 @@ class Question extends Component {
     return a;
   }
 
-  handleClic(e) {
+  handleClick(e) {
     if(e.target.getAttribute('data-state') === this.state.state) {
       SCORE.correct++;
 
@@ -38,7 +42,6 @@ class Question extends Component {
       SCORE.incorrect++;
     }
 
-    // show the score
     console.log('Correct: ' + SCORE.correct);
     console.log('Incorrect: ' + SCORE.incorrect);
 
@@ -48,16 +51,14 @@ class Question extends Component {
       index: rand,
       state : ARRAY[rand][0]
     });
-
   }
 
   render() {  
-
-    var correctOption = [ARRAY[this.state.index]]; 
-    var cleanedArray = ARRAY.slice();
+    let correctOption = [ARRAY[this.state.index]]; 
+    let cleanedArray = ARRAY.slice();
     cleanedArray.splice(this.state.index, 1);
-    var otherOptions = this.shuffle(cleanedArray).slice(0, 3);
-    var options = this.shuffle(correctOption.concat(otherOptions));
+    let otherOptions = this.shuffle(cleanedArray).slice(0, 3);
+    let options = this.shuffle(correctOption.concat(otherOptions));
 
     return (
       <div className={classnames(styles.Question, this.props.className)}>
@@ -73,5 +74,3 @@ class Question extends Component {
     );
   }
 }
-
-export default Question;
