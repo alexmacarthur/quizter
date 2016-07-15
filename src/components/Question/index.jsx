@@ -3,6 +3,7 @@ import classnames from 'classnames';
 
 import { SCORE, NUM_ITEMS, ARRAY } from 'app/utils/constants.js';
 import { getRandomIndex } from 'app/utils/functions';
+import Option from 'app/components/Option';
 
 import styles from './styles.scss';
 
@@ -17,8 +18,6 @@ export default class Question extends Component {
       index : rand,
       state : ARRAY[rand][0]
     };
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
   shuffle(a) {
@@ -28,33 +27,24 @@ export default class Question extends Component {
         x = a[i - 1];
         a[i - 1] = a[j];
         a[j] = x;
-    } 
+    }
     return a;
   }
 
-  handleClick(e) {
-    if(e.target.getAttribute('data-state') === this.state.state) {
-      SCORE.correct++;
+  onUpdate(context) {
+    console.log('updated the parent!');
 
-      window.updateTimer();
-
-    } else {
-      SCORE.incorrect++;
-    }
-
-    console.log('Correct: ' + SCORE.correct);
-    console.log('Incorrect: ' + SCORE.incorrect);
-
-    // update component with new question
     var rand = Math.floor(Math.random() * NUM_ITEMS);
-    this.setState({
+
+    console.log(context);
+    context.setState({
       index: rand,
       state : ARRAY[rand][0]
     });
   }
 
-  render() {  
-    let correctOption = [ARRAY[this.state.index]]; 
+  render() {
+    let correctOption = [ARRAY[this.state.index]];
     let cleanedArray = ARRAY.slice();
     cleanedArray.splice(this.state.index, 1);
     let otherOptions = this.shuffle(cleanedArray).slice(0, 3);
@@ -64,11 +54,9 @@ export default class Question extends Component {
       <div className={classnames(styles.Question, this.props.className)}>
         {this.state.state}
         <ul className="List">
-
           {options.map(function(item) {
-            return <li data-state={item[0]} onClick={this.handleClick} key={item[1]}>{item[1]}</li>;
+            return <Option thisThing={this} onUpdate={this.onUpdate} questionState={this.state.state} optionState={item[0]} key={item[1]}>{item[1]}</Option>;
           }.bind(this))}
-
         </ul>
       </div>
     );
