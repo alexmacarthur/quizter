@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 import styles from './styles.scss';
 
 class FinishScreen extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      timeRemaining : true
+    }
+  }
+
   componentDidMount() {
+    window.showFinishScreen = () => {
+      this.showFinishScreen();
+    }
+  }
 
-    // var elem = ReactDOM.findDOMNode(this);
-
-    // elem.style.opacity = 0;
-
-    // window.requestAnimationFrame(function() {
-    //     elem.style.transition = "opacity 2500ms";
-    //     elem.style.opacity = 1;
-    // });
-
+  showFinishScreen() {
+    this.setState({
+      timeRemaining : false
+    });
   }
 
   calculateScore() {
@@ -22,14 +30,20 @@ class FinishScreen extends Component {
   }
 
   render() {
+
+    let componentClass = classNames(
+      styles.FinishScreen, 
+      { 
+        'is-visible' : !this.state.timeRemaining
+      });
+
     return (
-      <div className={classnames(this.props.className, styles.FinishScreen)}>
+      <div className={componentClass}>
         <h2>You are finished!</h2>
         <span>Your final score is: {this.calculateScore()}</span>
       </div>
     )
   }
-
 }
 
 export default FinishScreen;

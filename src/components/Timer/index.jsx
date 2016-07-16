@@ -11,7 +11,7 @@ export default class Timer extends Component {
     super(props);
 
     this.state = {
-      count: 30000 // the initial amount of time a player starts with
+      count: 3000 // the initial amount of time a player starts with
     };
   }
 
@@ -21,7 +21,7 @@ export default class Timer extends Component {
     }.bind(this), 1000);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     window.updateTimer = ::this.updateTimer;
     this.interval();
   }
@@ -34,7 +34,7 @@ export default class Timer extends Component {
     this.setState({count: this.state.count - 1000});
 
     if (this.state.count <= 0) {
-      clearInterval(this.interval);
+      window.showFinishScreen();
       return;
     }
   }

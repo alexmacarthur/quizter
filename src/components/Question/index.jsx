@@ -32,11 +32,9 @@ export default class Question extends Component {
   }
 
   onUpdate(context) {
-    console.log('updated the parent!');
 
     var rand = Math.floor(Math.random() * NUM_ITEMS);
 
-    console.log(context);
     context.setState({
       index: rand,
       state : ARRAY[rand][0]
