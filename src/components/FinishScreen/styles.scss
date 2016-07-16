@@ -6,7 +6,7 @@
 .FinishScreen {
 	@include FinishScreen;
 
-		&.is-visible {
+		&.isVisible {
 		display: block;
 	}
 }

@@ -15,15 +15,12 @@ export default class Timer extends Component {
     };
   }
 
-  interval () {
-    setInterval(function() {
-      this.countdown();
-    }.bind(this), 1000);
-  }
-
   componentDidMount() {
     window.updateTimer = ::this.updateTimer;
-    this.interval();
+
+    this.timeInterval = setInterval(function() {
+      this.countdown();
+    }.bind(this), 1000);
   }
 
   updateTimer() {
@@ -33,7 +30,8 @@ export default class Timer extends Component {
   countdown() {
     this.setState({count: this.state.count - 1000});
 
-    if (this.state.count <= 0) {
+    if (this.state.count === 0) {
+      clearInterval(this.timeInterval);
       window.showFinishScreen();
       return;
     }

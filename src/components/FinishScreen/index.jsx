@@ -31,10 +31,12 @@ class FinishScreen extends Component {
 
   render() {
 
+    console.log('y');
+
     let componentClass = classNames(
       styles.FinishScreen, 
       { 
-        'is-visible' : !this.state.timeRemaining
+        [`${styles.isVisible}`] : !this.state.timeRemaining
       });
 
     return (
