@@ -42,6 +42,9 @@ export default class Question extends Component {
   }
 
   render() {
+
+    console.log(ARRAY.length);
+
     let correctOption = [ARRAY[this.state.index]];
     let cleanedArray = ARRAY.slice();
     cleanedArray.splice(this.state.index, 1);

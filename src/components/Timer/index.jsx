@@ -24,7 +24,7 @@ export default class Timer extends Component {
   }
 
   updateTimer() {
-    this.state.count = this.state.count + 5000;
+    this.state.count = this.state.count + 2000;
   }
 
   countdown() {

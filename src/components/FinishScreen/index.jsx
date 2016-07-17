@@ -12,8 +12,6 @@ class FinishScreen extends Component {
     this.state = {
       timeRemaining : true
     }
-
-    console.log(SCORE);
   }
 
   componentDidMount() {

@@ -16,6 +16,8 @@ export default class Option extends Component {
     if(this.props.optionState === this.props.questionState) {
       SCORE.correct++;
       window.updateTimer();
+
+      console.log(this.props.optionState)
     } else {
       SCORE.incorrect++;
     }
