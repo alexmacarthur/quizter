@@ -11,7 +11,7 @@ export default class Timer extends Component {
     super(props);
 
     this.state = {
-      count: 3000 // the initial amount of time a player starts with
+      count: 30000 // the initial amount of time a player starts with
     };
   }
 

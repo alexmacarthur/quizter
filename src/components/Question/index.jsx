@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-import { SCORE, NUM_ITEMS, ARRAY } from 'app/utils/constants.js';
+import { NUM_ITEMS, ARRAY } from 'app/utils/constants.js';
 import { getRandomIndex } from 'app/utils/functions';
 import Option from 'app/components/Option';
 

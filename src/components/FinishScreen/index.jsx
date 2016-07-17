@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { SCORE } from 'app/utils/constants.js';
 
 import styles from './styles.scss';
 
@@ -11,11 +12,17 @@ class FinishScreen extends Component {
     this.state = {
       timeRemaining : true
     }
+
+    console.log(SCORE);
   }
 
   componentDidMount() {
     window.showFinishScreen = () => {
       this.showFinishScreen();
+    }
+
+    window.updateScore = () => {
+      this.forceUpdate();
     }
   }
 
@@ -25,13 +32,7 @@ class FinishScreen extends Component {
     });
   }
 
-  calculateScore() {
-    return this.props.correct;
-  }
-
   render() {
-
-    console.log('y');
 
     let componentClass = classNames(
       styles.FinishScreen, 
@@ -42,7 +43,7 @@ class FinishScreen extends Component {
     return (
       <div className={componentClass}>
         <h2>You are finished!</h2>
-        <span>Your final score is: {this.calculateScore()}</span>
+        <span>Your final score is: {SCORE.correct}</span>
       </div>
     )
   }

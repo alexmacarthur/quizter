@@ -1,12 +1,12 @@
 @mixin FinishScreen {
 	background: red;
-	display: none;
+	display: block;
 }
 
 .FinishScreen {
 	@include FinishScreen;
 
-		&.isVisible {
+	&.isVisible {
 		display: block;
 	}
 }

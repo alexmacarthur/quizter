@@ -20,10 +20,9 @@ export default class Option extends Component {
       SCORE.incorrect++;
     }
 
-    this.props.onUpdate(this.props.thisThing);
+    window.updateScore();
 
-    console.log('Correct: ' + SCORE.correct);
-    console.log('Incorrect: ' + SCORE.incorrect);
+    this.props.onUpdate(this.props.thisThing);
   }
 
   render() {
