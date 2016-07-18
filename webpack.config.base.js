@@ -2,6 +2,8 @@
 
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var precss       = require('precss');
+var autoprefixer = require('autoprefixer');
 
 var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: path.resolve('src', 'index.html'),
@@ -29,12 +31,20 @@ var scssLoader = {
   exclude: /node_modules/
 };
 
+var cssLoader = {
+  test:   /\.css$/,
+  loader: "style-loader!css-loader!postcss-loader"
+};
+
 var configuration = {
   entry: {
     app: 'src/index.js'
   },
   module: {
-    loaders: [babelLoader, scssLoader]
+    loaders: [babelLoader, scssLoader, cssLoader]
+  },
+  postcss: function () {
+    return [precss, autoprefixer];
   },
   output: {
     path: path.resolve('build'),

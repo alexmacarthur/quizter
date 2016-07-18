@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 
 import { getRandomIndex } from 'app/utils/functions';
-import { ARRAY } from 'app/utils/constants'; 
+import { ARRAY } from 'app/utils/constants';
 
 import styles from './styles.scss';
 
@@ -24,7 +24,7 @@ export default class Timer extends Component {
   }
 
   updateTimer() {
-    this.state.count = this.state.count + 2000;
+    this.state.count = this.state.count + 1000;
   }
 
   countdown() {
@@ -38,7 +38,7 @@ export default class Timer extends Component {
   }
 
   render() {
-    return ( 
+    return (
       <div className="Countdown">
         <span>Time Remaining: </span>
         <span id="seconds">{this.state.count/1000}</span>

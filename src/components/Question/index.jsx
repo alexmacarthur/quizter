@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-import { NUM_ITEMS, ARRAY } from 'app/utils/constants.js';
+import { ARRAY } from 'app/utils/constants.js';
 import { getRandomIndex } from 'app/utils/functions';
 import Option from 'app/components/Option';
 
@@ -33,7 +33,7 @@ export default class Question extends Component {
 
   onUpdate(context) {
 
-    var rand = Math.floor(Math.random() * NUM_ITEMS);
+    var rand = Math.floor(Math.random() * ARRAY.length);
 
     context.setState({
       index: rand,
@@ -43,8 +43,6 @@ export default class Question extends Component {
 
   render() {
 
-    console.log(ARRAY.length);
-
     let correctOption = [ARRAY[this.state.index]];
     let cleanedArray = ARRAY.slice();
     cleanedArray.splice(this.state.index, 1);
@@ -53,8 +51,8 @@ export default class Question extends Component {
 
     return (
       <div className={classnames(styles.Question, this.props.className)}>
-        {this.state.state}
-        <ul className="List">
+        <h2>{this.state.state}</h2>
+        <ul>
           {options.map(function(item) {
             return <Option thisThing={this} onUpdate={this.onUpdate} questionState={this.state.state} optionState={item[0]} key={item[1]}>{item[1]}</Option>;
           }.bind(this))}

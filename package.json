@@ -32,6 +32,8 @@
     "npm-run-all": "^2.2.2",
     "onchange": "^2.5.0",
     "postcss-cli": "^2.5.2",
+    "postcss-loader": "^0.9.1",
+    "precss": "^1.4.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.5.1",
