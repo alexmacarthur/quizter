@@ -1,11 +1,27 @@
-@import 'normalize';
+@import 'base/normalize';
+@import 'base/variables';
+@import 'components/Container';
+@import 'components/FinishScreen';
+@import 'components/Question';
+@import 'components/Timer';
+
+html {
+  font-size: 62.5%
+}
+
+* {
+	box-sizing: border-box;
+  color: $white;
+}
 
 body {
+  font-size: 1.6rem;
+  -webkit-font-smoothing: subpixel-antialiased;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-}
 
-#content {
-  flex: 1;
+  & > div {
+    flex: 1;
+  }
 }

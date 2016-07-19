@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { SCORE } from 'app/utils/constants.js';
 
-import styles from './styles.scss';
+import styles from '../scss/styles.scss';
 
 class FinishScreen extends Component {
 
@@ -33,15 +33,17 @@ class FinishScreen extends Component {
   render() {
 
     let componentClass = classNames(
-      styles.FinishScreen, 
-      { 
+      styles.FinishScreen,
+      {
         [`${styles.isVisible}`] : !this.state.timeRemaining
       });
 
     return (
       <div className={componentClass}>
-        <h2>You are finished!</h2>
-        <span>Your final score is: {SCORE.correct}</span>
+        <div className={classNames(styles.Container)}>
+          <h2>You are finished!</h2>
+          <span>Your final score is: {SCORE.correct}</span>
+        </div>
       </div>
     )
   }

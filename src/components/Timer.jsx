@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { getRandomIndex } from 'app/utils/functions';
 import { ARRAY } from 'app/utils/constants';
 
-import styles from './styles.scss';
+import styles from '../scss/styles.scss';
 
 export default class Timer extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ export default class Timer extends Component {
 
   render() {
     return (
-      <div className="Countdown">
+      <div className={classnames(styles.Timer, this.props.className)}>
         <span>Time Remaining: </span>
         <span id="seconds">{this.state.count/1000}</span>
       </div>

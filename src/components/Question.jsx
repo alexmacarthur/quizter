@@ -5,7 +5,7 @@ import { ARRAY } from 'app/utils/constants.js';
 import { getRandomIndex } from 'app/utils/functions';
 import Option from 'app/components/Option';
 
-import styles from './styles.scss';
+import styles from '../scss/styles.scss';
 
 export default class Question extends Component {
 
