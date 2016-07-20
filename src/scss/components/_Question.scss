@@ -1,29 +1,14 @@
 .Question {
 	text-align: center;
 	display: inline-block;
-  min-width: 250px;
+
+	h2 {
+    margin-bottom: 4rem;
+	}
 
 	ul {
-		flex-direction: column;
-		list-style: none;
-		padding: 0;
-
-		li {
-			display: block;
-			width: auto;
-			padding: 1rem 5rem;
-			cursor: pointer;
-			background: $white;
-			color: $gray-dark;
-
-			&:hover {
-				background: $white;
-				color: $gray-dark;
-			}
-
-			& + li {
-				margin-top: 1rem;
-			}
+			flex-direction: column;
+			list-style: none;
+			padding: 0;
 		}
-	}
 }

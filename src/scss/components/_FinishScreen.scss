@@ -11,6 +11,10 @@
 	opacity: 0;
 	z-index: -1;
 
+	.Container {
+		flex-direction: column;
+	}
+
 	&.isVisible {
 		opacity: 1;
 		z-index: 1;

@@ -27,7 +27,7 @@ export default class Option extends Component {
 
   render() {
     return (
-      <li className={styles.Option} onClick={this.handleClick}>
+      <li className={classnames(styles.Option, this.props.className)} onClick={this.handleClick}>
         {this.props.children}
       </li>
     )
