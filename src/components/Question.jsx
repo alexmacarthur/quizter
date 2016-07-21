@@ -18,7 +18,10 @@ export default class Question extends Component {
 
     this.state = {
       index : rand,
-      state : ARRAY[rand][0]
+      state : ARRAY[rand][0],
+      slideOffScreen : false,
+      setNewPosition : false,
+      slideOnScreen : false
     };
   }
 
@@ -36,10 +39,27 @@ export default class Question extends Component {
 
     let rand = getRandomIndex();
 
+    // First, slide the old question off the screen, triggered by state update
     context.setState({
-      index: rand,
-      state : ARRAY[rand][0]
+      slideOffScreen : true
     });
+
+    // Next, update state to set question on other side of screen (to give appearance of new question sliding in)
+    setTimeout(() => {
+      context.setState({
+        index : rand,
+        state : ARRAY[rand][0],
+        setNewPosition : true
+      })
+    }, 150);
+
+    // Finally, update state to make newly-updated question slide in
+    setTimeout(() => {
+      context.setState({
+        slideOnScreen : true
+      })
+    }, 300);
+
   }
 
   render() {
@@ -50,7 +70,7 @@ export default class Question extends Component {
     // make a copy of the array so we can do stuff to it
     let cleanedArray = ARRAY.slice();
 
-    // remove the correct option as a possible other option 
+    // remove the correct option as a possible other option
     cleanedArray.splice(this.state.index, 1);
 
     // set the other options by shuffling our array copy and getting three options
@@ -59,8 +79,15 @@ export default class Question extends Component {
     // add the correct option we saved earlier to the list to get our final set of options
     let options = this.shuffle(correctOption.concat(otherOptions));
 
+    let componentClass = classnames(
+      styles.Question,
+      {
+        [`${styles.isSlidingOff}`] : this.state.slideOffScreen && !this.state.slideOnScreen,
+        [`${styles.setNewPosition}`] : this.state.setNewPosition && !this.state.slideOnScreen
+      });
+
     return (
-      <div className={classnames(styles.Question, this.props.className)}>
+      <div className={classnames(componentClass, this.props.className)}>
         <h2>{this.state.state}</h2>
         <ul>
           {options.map(function(item) {

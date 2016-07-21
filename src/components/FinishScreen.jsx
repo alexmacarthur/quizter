@@ -16,7 +16,7 @@ class FinishScreen extends Component {
 
   componentDidMount() {
     window.showFinishScreen = () => {
-      this.showFinishScreen();
+      //this.showFinishScreen();
     }
 
     window.updateScore = () => {
