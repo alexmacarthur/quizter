@@ -60,6 +60,8 @@ export const ANSWERS = {
 
 export const ARRAY = [];
 
+export const SHOWNSTATES = [];
+
 (function() {
   let i = 0;
   for(let key in ANSWERS){
@@ -67,5 +69,3 @@ export const ARRAY = [];
     i++;
   }
 })();
-
-export const NUM_ITEMS = ARRAY.length;

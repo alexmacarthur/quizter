@@ -1,5 +1,5 @@
-import { NUM_ITEMS } from './constants';
+import { ARRAY } from './constants';
 
 export function getRandomIndex () {
-	return Math.floor(Math.random() * NUM_ITEMS);
+	return Math.floor(Math.random() * ARRAY.length);
 }

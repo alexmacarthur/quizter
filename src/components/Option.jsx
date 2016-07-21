@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SCORE, NUM_ITEMS, ARRAY } from 'app/utils/constants';
+import { SCORE, SHOWNSTATES } from 'app/utils/constants';
 import classnames from 'classnames';
 
 import styles from '../scss/styles.scss';
@@ -19,6 +19,9 @@ export default class Option extends Component {
     } else {
       SCORE.incorrect++;
     }
+
+    // push to SHOWNSTATES array so we don't show a state question that's already been shown. 
+    SHOWNSTATES.push(this.props.questionState);
 
     window.updateScore();
 

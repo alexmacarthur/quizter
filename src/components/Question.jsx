@@ -14,6 +14,8 @@ export default class Question extends Component {
 
     let rand = getRandomIndex();
 
+    console.log(ARRAY[rand][0]);
+
     this.state = {
       index : rand,
       state : ARRAY[rand][0]
@@ -21,10 +23,9 @@ export default class Question extends Component {
   }
 
   shuffle(a) {
-    var j, x, i;
-    for (i = a.length; i; i -= 1) {
-        j = Math.floor(Math.random() * i);
-        x = a[i - 1];
+    for (let i = a.length; i; i -= 1) {
+        let j = Math.floor(Math.random() * i);
+        let x = a[i - 1];
         a[i - 1] = a[j];
         a[j] = x;
     }
@@ -33,7 +34,7 @@ export default class Question extends Component {
 
   onUpdate(context) {
 
-    var rand = Math.floor(Math.random() * ARRAY.length);
+    let rand = getRandomIndex();
 
     context.setState({
       index: rand,
@@ -43,10 +44,19 @@ export default class Question extends Component {
 
   render() {
 
+    // grab the correct option to the state, to make sure it's in the list
     let correctOption = [ARRAY[this.state.index]];
+
+    // make a copy of the array so we can do stuff to it
     let cleanedArray = ARRAY.slice();
+
+    // remove the correct option as a possible other option 
     cleanedArray.splice(this.state.index, 1);
+
+    // set the other options by shuffling our array copy and getting three options
     let otherOptions = this.shuffle(cleanedArray).slice(0, 3);
+
+    // add the correct option we saved earlier to the list to get our final set of options
     let options = this.shuffle(correctOption.concat(otherOptions));
 
     return (
