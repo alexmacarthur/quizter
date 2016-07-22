@@ -91,6 +91,10 @@ export default class Question extends Component {
     this.generateOptions();
   }
 
+  componentDidUpdate() {
+    
+  }
+
   render() {
 
     let componentClass = classnames(
@@ -100,6 +104,8 @@ export default class Question extends Component {
         [`${styles.setNewPosition}`] : this.state.setNewPosition,
         [`${styles.slideOnScreen}`] : this.state.slideOnScreen
       });
+
+    console.log(this.state);
 
     return (
       <div className={classnames(componentClass, this.props.className)}>
