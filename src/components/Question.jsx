@@ -13,7 +13,6 @@ export default class Question extends Component {
     super(props);
 
     this.state = {
-      index : null,
       state : null,
       options : {},
       slideOffScreen : false,
@@ -36,19 +35,19 @@ export default class Question extends Component {
 
     // set the state
     let rand = getRandomIndex();
+
     this.setState({
-      index : rand,
       state : ARRAY[rand][0]
     })
 
     // grab the correct option to the state, to make sure it's in the list
-    let correctOption = [ARRAY[this.state.index]];
+    let correctOption = [ARRAY[rand]];
 
     // make a copy of the array so we can do stuff to it
     let cleanedArray = ARRAY.slice();
 
     // remove the correct option as a possible other option
-    cleanedArray.splice(this.state.index, 1);
+    cleanedArray.splice(rand, 1);
 
     // set the other options by shuffling our array copy and getting three options
     let otherOptions = this.shuffle(cleanedArray).slice(0, 3);
