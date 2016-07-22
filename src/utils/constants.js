@@ -53,7 +53,7 @@ export const ANSWERS = {
   "Vermont" : "Montpelier",
   "Virginia" : "Richmond",
   "Washington" : "Olympia",
-  "WV" : "Charleston",
+  "West Virginia" : "Charleston",
   "Wisconsin" : "Madison",
   "Wyoming" : "Cheyenne"
 };
