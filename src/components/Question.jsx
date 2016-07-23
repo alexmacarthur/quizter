@@ -62,8 +62,6 @@ export default class Question extends Component {
 
   onUpdate(context) {
 
-    context.generateOptions();
-
     // First, slide the old question off the screen, triggered by state update
     context.setState({
       slideOffScreen : true
@@ -71,11 +69,13 @@ export default class Question extends Component {
 
     // Next, update state to set question on other side of screen (to give appearance of new question sliding in)
     setTimeout(() => {
+      context.generateOptions();
+
       context.setState({
         slideOffScreen : false,
         setNewPosition : true
       })
-    }, 150);
+    }, 250);
 
     // Finally, update state to make newly-updated question slide in
     setTimeout(() => {
@@ -83,7 +83,7 @@ export default class Question extends Component {
         setNewPosition : false,
         slideOnScreen : true
       })
-    }, 300);
+    }, 500);
 
   }
 
@@ -91,21 +91,15 @@ export default class Question extends Component {
     this.generateOptions();
   }
 
-  componentDidUpdate() {
-    
-  }
-
   render() {
 
     let componentClass = classnames(
       styles.Question,
       {
-        [`${styles.isSlidingOff}`] : this.state.slideOffScreen,
+        [`${styles.slideOffScreen}`] : this.state.slideOffScreen,
         [`${styles.setNewPosition}`] : this.state.setNewPosition,
         [`${styles.slideOnScreen}`] : this.state.slideOnScreen
       });
-
-    console.log(this.state);
 
     return (
       <div className={classnames(componentClass, this.props.className)}>
