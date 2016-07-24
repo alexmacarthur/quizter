@@ -61,20 +61,11 @@ export default class Question extends Component {
 
   onOptionClick(context) {
 
-    // First, slide the old question off the screen, triggered by state update
-    context.setState({
-      slideOffScreen : true
-    });
+    window.setActiveQuestion();
 
     // Next, update state to set question on other side of screen (to give appearance of new question sliding in)
     setTimeout(() => {
-      window.setActiveQuestion();
       context.generateOptions();
-
-      context.setState({
-        slideOffScreen : false
-      });
-
     }, 250);
 
   }
@@ -85,14 +76,8 @@ export default class Question extends Component {
 
   render() {
 
-    let componentClass = classnames(
-      styles.Question,
-      {
-        [`${styles.SlideOffScreen}`] : this.state.SlideOffScreen,
-      });
-
     return (
-      <div className={classnames(componentClass, this.props.className)}>
+      <div className={classnames(styles.Question, this.props.className)}>
         <h2>{this.state.state}</h2>
         <ul>
           {this.state.options.map(function(item) {

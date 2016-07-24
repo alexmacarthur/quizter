@@ -14,7 +14,11 @@ export default class Container extends Component {
 
 	    this.state = {
 	    	firstQuestionIsActive : true,
-	    	secondQuestionIsActive : false
+	    	secondQuestionIsActive : false,
+	    	firstQuestionSlideOffScreen : false,
+	    	secondQuestionSlideOffScreen : false,
+	    	setFirstQuestionNewPosition: false,
+	    	setSecondQuestionNewPosition : false
 	    };
 	  }
 
@@ -23,26 +27,42 @@ export default class Container extends Component {
 	}
 
 	setActiveQuestion() {
+
 		this.setState({
 	    	firstQuestionIsActive : !this.state.firstQuestionIsActive,
-	    	secondQuestionIsActive : !this.state.secondQuestionIsActive
-		})
+	    	secondQuestionIsActive : !this.state.secondQuestionIsActive,
+	    	firstQuestionSlideOffScreen : !this.state.firstQuestionSlideOffScreen,
+	    	secondQuestionSlideOffScreen : !this.state.secondQuestionSlideOffScreen
+		});
+
+		setTimeout(() => {
+			this.setState({
+				setFirstQuestionNewPosition : this.state.firstQuestionSlideOffScreen,
+				setSecondQuestionNewPosition : this.state.secondQuestionSlideOffScreen
+			})
+		}, 250);
 	}
 
 	render() {
 
-		let firstQuestionActiveStatus = classnames({
-			[`${styles.ActiveQuestion}`] : this.state.firstQuestionIsActive
-		});
+		console.log(this.state);
 
-		let secondQuestionActiveStatus = classnames({
-			[`${styles.ActiveQuestion}`] : this.state.secondQuestionIsActive
+		let firstQuestionClasses = classnames({
+			[`${styles.ActiveQuestion}`] : this.state.firstQuestionIsActive,
+			[`${styles.SlideOffScreen}`] : this.state.firstQuestionSlideOffScreen,
+			[`${styles.SetNewPosition}`] : this.state.setFirstQuestionNewPosition
+		}); 
+
+		let secondQuestionClasses = classnames({
+			[`${styles.ActiveQuestion}`] : this.state.secondQuestionIsActive,
+			[`${styles.SlideOffScreen}`] : this.state.secondQuestionSlideOffScreen,
+			[`${styles.SetNewPosition}`] : this.state.setSecondQuestionNewPosition
 		});
 
 		return (
 		  <div className={styles.Container}>
-		    <Question className={firstQuestionActiveStatus} />
-		    <Question className={secondQuestionActiveStatus} />
+		    <Question className={firstQuestionClasses} />
+		    <Question className={secondQuestionClasses} />
 		    <Timer/>
 		    <FinishScreen correct={SCORE.correct} incorrect={SCORE.incorrect}/>
 		  </div>
