@@ -12,7 +12,8 @@ export default class Container extends Component {
   render() {
     return (
       <div className={styles.Container}>
-        <Question className={styles.Question}/>
+        <Question />
+        <Question />
         <Timer/>
         <FinishScreen correct={SCORE.correct} incorrect={SCORE.incorrect}/>
       </div>
