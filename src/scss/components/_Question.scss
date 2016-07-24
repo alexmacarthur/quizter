@@ -6,9 +6,9 @@
 	top: 50%;
 	width: 100%;
 	left: 50%;
-	transform: translate(-50%, -50%);
-	opacity: 1;
-	z-index: 2;
+	transform: translate(0%, -50%);
+	opacity: .15;
+	z-index: 1;
 
 	h2 {
     	margin-bottom: 4rem;
@@ -22,18 +22,13 @@
 	}
 }
 
-.slideOffScreen {
+.SlideOffScreen {
 	opacity: 0;
 	transform: translate(-100%, -50%);
 }
 
-.setNewPosition {
-	transition: all 0s;
-	transform: translate(0%, -50%);
-	opacity: 0;
-}
-
-.Next {
-	@extend .setNewPosition;
-	opacity: .15; // TEMP
+.ActiveQuestion {
+	transform: translate(-50%, -50%);
+	opacity: 1;
+	z-index: 2;
 }

@@ -25,7 +25,7 @@ export default class Option extends Component {
 
     window.updateScore();
 
-    this.props.onUpdate(this.props.thisThing);
+    this.props.onOptionClick(this.props.thisThing);
   }
 
   render() {

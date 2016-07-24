@@ -3,8 +3,6 @@ export const SCORE = {
   incorrect: 0
 }
 
-window.INITIAL_QUESTION_BEING_RENDERED = true;
-
 export const ANSWERS = {
   "Alabama" : "Montgomery",
   "Alaska" : "Juneau",

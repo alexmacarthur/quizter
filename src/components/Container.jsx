@@ -9,14 +9,43 @@ import styles from '../scss/styles.scss';
 
 export default class Container extends Component {
 
-  render() {
-    return (
-      <div className={styles.Container}>
-        <Question />
-        <Question />
-        <Timer/>
-        <FinishScreen correct={SCORE.correct} incorrect={SCORE.incorrect}/>
-      </div>
-    )
-  }
+	constructor(props) {
+	    super(props);
+
+	    this.state = {
+	    	firstQuestionIsActive : true,
+	    	secondQuestionIsActive : false
+	    };
+	  }
+
+	componentDidMount() {
+		window.setActiveQuestion = ::this.setActiveQuestion;
+	}
+
+	setActiveQuestion() {
+		this.setState({
+	    	firstQuestionIsActive : !this.state.firstQuestionIsActive,
+	    	secondQuestionIsActive : !this.state.secondQuestionIsActive
+		})
+	}
+
+	render() {
+
+		let firstQuestionActiveStatus = classnames({
+			[`${styles.ActiveQuestion}`] : this.state.firstQuestionIsActive
+		});
+
+		let secondQuestionActiveStatus = classnames({
+			[`${styles.ActiveQuestion}`] : this.state.secondQuestionIsActive
+		});
+
+		return (
+		  <div className={styles.Container}>
+		    <Question className={firstQuestionActiveStatus} />
+		    <Question className={secondQuestionActiveStatus} />
+		    <Timer/>
+		    <FinishScreen correct={SCORE.correct} incorrect={SCORE.incorrect}/>
+		  </div>
+		)
+	}
 }

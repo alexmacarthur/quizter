@@ -16,9 +16,7 @@ export default class Question extends Component {
     this.state = {
       state : null,
       options : {},
-      slideOffScreen : false,
-      setNewPosition : false,
-      hasClassOfNext : false
+      slideOffScreen : false
     };
   }
 
@@ -61,24 +59,20 @@ export default class Question extends Component {
     });
   }
 
-  onUpdate(context) {
+  onOptionClick(context) {
 
     // First, slide the old question off the screen, triggered by state update
     context.setState({
       slideOffScreen : true
     });
 
-    context.setState({
-      hasClassOfNext : hasClass(ReactDOM.findDOMNode(context), styles.Next)
-    });
-
     // Next, update state to set question on other side of screen (to give appearance of new question sliding in)
     setTimeout(() => {
+      window.setActiveQuestion();
       context.generateOptions();
 
       context.setState({
-        slideOffScreen : false,
-        setNewPosition : true
+        slideOffScreen : false
       });
 
     }, 250);
@@ -90,23 +84,19 @@ export default class Question extends Component {
   }
 
   render() {
-    
+
     let componentClass = classnames(
       styles.Question,
       {
-        [`${styles.slideOffScreen}`] : this.state.slideOffScreen,
-        [`${styles.setNewPosition}`] : this.state.setNewPosition,
-        [`${styles.Next}`] : this.hasClassOfNext || window.INITIAL_QUESTION_BEING_RENDERED
+        [`${styles.SlideOffScreen}`] : this.state.SlideOffScreen,
       });
-
-    window.INITIAL_QUESTION_BEING_RENDERED = false;
 
     return (
       <div className={classnames(componentClass, this.props.className)}>
         <h2>{this.state.state}</h2>
         <ul>
           {this.state.options.map(function(item) {
-            return <Option thisThing={this} onUpdate={this.onUpdate} questionState={this.state.state} optionState={item[0]} key={item[1]}>{item[1]}</Option>;
+            return <Option thisThing={this} onOptionClick={this.onOptionClick} questionState={this.state.state} optionState={item[0]} key={item[1]}>{item[1]}</Option>;
           }.bind(this))}
         </ul>
       </div>
