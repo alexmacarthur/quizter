@@ -1,5 +1,5 @@
 .Question {
-	transition: all .25s ease-in-out 0s;
+	transition: all .25s ease-in-out;
 	text-align: center;
 	display: inline-block;
 	position: absolute;
@@ -7,7 +7,7 @@
 	width: 100%;
 	left: 50%;
 	transform: translate(0%, -50%);
-	opacity: .15;
+	opacity: 0;
 	z-index: 1;
 
 	h2 {
@@ -33,7 +33,6 @@
 	z-index: 2;
 }
 
-.setNewPosition {
-	transition: all 0s;
-	left: 100%;
+.SetNewPosition {
+	transform: translate(0%, -50%);
 }

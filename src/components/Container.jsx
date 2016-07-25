@@ -28,24 +28,34 @@ export default class Container extends Component {
 
 	setActiveQuestion() {
 
+		/* 	Swap the 'active' status of each question,
+			and make the current active slide (BEFORE updating the state) slide off screen.
+
+			MEANING: Only the currently active question will get the SlideOffScreen class. 
+		*/
 		this.setState({
 	    	firstQuestionIsActive : !this.state.firstQuestionIsActive,
 	    	secondQuestionIsActive : !this.state.secondQuestionIsActive,
-	    	firstQuestionSlideOffScreen : !this.state.firstQuestionSlideOffScreen,
-	    	secondQuestionSlideOffScreen : !this.state.secondQuestionSlideOffScreen
+	    	firstQuestionSlideOffScreen : this.state.firstQuestionIsActive,
+	    	secondQuestionSlideOffScreen : this.state.secondQuestionIsActive,
+			setFirstQuestionNewPosition : false,
+			setSecondQuestionNewPosition : false,
 		});
 
+		/*	Set the new position of the question that was just moved off the screen to the opposite side,
+			to give the effect that new questions are just rolling in as needed. 
+			
+			MEANING: Only the inactive question should get the SetNewPosition class.
+		*/
 		setTimeout(() => {
 			this.setState({
-				setFirstQuestionNewPosition : this.state.firstQuestionSlideOffScreen,
-				setSecondQuestionNewPosition : this.state.secondQuestionSlideOffScreen
+				setFirstQuestionNewPosition : !this.state.firstQuestionIsActive,
+				setSecondQuestionNewPosition : !this.state.secondQuestionIsActive,
 			})
 		}, 250);
 	}
 
 	render() {
-
-		console.log(this.state);
 
 		let firstQuestionClasses = classnames({
 			[`${styles.ActiveQuestion}`] : this.state.firstQuestionIsActive,
