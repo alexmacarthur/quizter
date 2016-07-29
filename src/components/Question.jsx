@@ -68,13 +68,40 @@ export default class Question extends Component {
         this.generateOptions();
     }
 
+    componentDidMount() {
+      document.addEventListener('keydown', function(event) {
+        switch(event.which) {
+          case 37:
+            document.querySelectorAll("[data-index='3']")[0].click();
+            break;
+          case 38:
+            document.querySelectorAll("[data-index='0']")[0].click();
+            break;
+          case 39:
+            document.querySelectorAll("[data-index='1']")[0].click();
+            break;
+          case 40:
+            document.querySelectorAll("[data-index='2']")[0].click();
+            break;
+        }
+      });
+    }
+
     render() {
         return (
             <div className={classnames(styles.Question, this.props.className)}>
                 <h2>{this.state.state}</h2>
                 <ul>
-                    {this.state.options.map(function(item) {
-                        return <Option thisThing={this} onOptionClick={this.onOptionClick} questionValue={this.state.state} optionValue={item[0]} optionCorrectAnswer={this.state.city} key={item[1]}>{item[1]}</Option>;
+                    {this.state.options.map(function(item, index) {
+                        return <Option
+                          index={index}
+                          thisThing={this}
+                          onOptionClick={this.onOptionClick}
+                          questionValue={this.state.state}
+                          optionValue={item[0]}
+                          optionCorrectAnswer={this.state.city}
+                          key={item[1]}>{item[1]}
+                              </Option>;
                     }.bind(this))}
                 </ul>
             </div>

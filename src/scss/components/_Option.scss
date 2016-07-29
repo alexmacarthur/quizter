@@ -1,6 +1,5 @@
 .Option {
   @include button;
-  min-width: 200px;
   position: relative;
 
   &:nth-child(1) {
@@ -8,7 +7,7 @@
   }
 
   &:nth-child(2) {
-    transform: translate(10%, 0);
+    transform: translate(7%, 0);
   }
 
   &:nth-child(3) {
@@ -16,6 +15,6 @@
   }
 
   &:nth-child(4) {
-    transform: translate(-110%, -200%);
+    transform: translate(-107%, -200%);
   }
 }

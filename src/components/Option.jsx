@@ -8,10 +8,10 @@ export default class Option extends Component {
 
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSelection = this.handleSelection.bind(this);
   }
 
-  handleClick(e) {
+  handleSelection(e) {
 
     if(this.props.optionValue === this.props.questionValue) {
       GAME_DATA.correct++;
@@ -37,7 +37,7 @@ export default class Option extends Component {
 
   render() {
     return (
-      <li className={classnames(styles.Option, this.props.className)} onClick={this.handleClick}>
+      <li data-index={this.props.index} className={classnames(styles.Option, this.props.className)} onClick={this.handleSelection}>
         {this.props.children}
       </li>
     )

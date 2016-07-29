@@ -24,12 +24,12 @@ export default class Timer extends Component {
   startTimer() {
     let _this = window.thisTimer;
     _this.timeInterval = setInterval(() => {
-      //_this.countdown();
+      _this.countdown();
     }, 1000);
   }
 
   updateTimer() {
-    this.state.count = this.state.count + 1000;
+    thisTimer.state.count = thisTimer.state.count + 1000;
   }
 
   countdown() {
