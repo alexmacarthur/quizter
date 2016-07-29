@@ -1,0 +1,34 @@
+.WelcomeScreen {
+  transition: all .25s ease-in-out;
+  background: $gray-dark;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  &.isInvisible {
+    opacity: 0;
+    z-index: -1;
+  }
+
+  .InnerContainer {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.WelcomeScreen-header {
+  margin: 0;
+}
+
+.WelcomeScreen-instructions {
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.WelcomeScreen-button {
+  @include button;
+}

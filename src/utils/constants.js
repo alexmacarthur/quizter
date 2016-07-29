@@ -1,6 +1,8 @@
-export const SCORE = {
+export const GAME_DATA = {
   correct: 0,
-  incorrect: 0
+  incorrect: 0,
+  score : 0,
+  incorrect_questions : []
 }
 
 export const ANSWERS = {
@@ -60,7 +62,7 @@ export const ANSWERS = {
 
 export const ARRAY = [];
 
-export const SHOWNSTATES = [];
+export const SHOWNQUESTIONS = [];
 
 (function() {
   let i = 0;

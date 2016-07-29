@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SCORE, SHOWNSTATES } from 'app/utils/constants';
+import { GAME_DATA, SHOWNQUESTIONS } from 'app/utils/constants';
 import classnames from 'classnames';
 
 import styles from '../scss/styles.scss';
@@ -13,15 +13,22 @@ export default class Option extends Component {
 
   handleClick(e) {
 
-    if(this.props.optionState === this.props.questionState) {
-      SCORE.correct++;
+    if(this.props.optionValue === this.props.questionValue) {
+      GAME_DATA.correct++;
       window.updateTimer();
     } else {
-      SCORE.incorrect++;
+      GAME_DATA.incorrect++;
+
+      GAME_DATA.incorrect_questions.push({
+        index : GAME_DATA.incorrect_questions.length,
+        state : this.props.questionValue,
+        yourAnswer : this.props.children,
+        correctAnswer : this.props.optionCorrectAnswer
+      });
     }
 
-    // push to SHOWNSTATES array so we don't show a state question that's already been shown. 
-    SHOWNSTATES.push(this.props.questionState);
+    // push to SHOWNQUESTIONS array so we don't show a question that's already been shown.
+    SHOWNQUESTIONS.push(this.props.questionValue);
 
     window.updateScore();
 

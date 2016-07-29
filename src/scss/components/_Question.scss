@@ -4,35 +4,18 @@
 	display: inline-block;
 	position: absolute;
 	top: 50%;
-	width: 100%;
+	width: auto;
 	left: 50%;
-	transform: translate(0%, -50%);
-	opacity: 0;
-	z-index: 1;
+	transform: translate(-50%, -50%);
 
 	h2 {
-    	margin-bottom: 4rem;
+    	margin-bottom: 5rem;
 	}
 
 	ul {
 		flex-direction: column;
 		list-style: none;
-		display: inline-block;
 		padding: 0;
+		display: flex;
 	}
-}
-
-.SlideOffScreen {
-	opacity: 0;
-	transform: translate(-100%, -50%);
-}
-
-.ActiveQuestion {
-	transform: translate(-50%, -50%);
-	opacity: 1;
-	z-index: 2;
-}
-
-.SetNewPosition {
-	transform: translate(0%, -50%);
 }

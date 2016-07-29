@@ -1,24 +1,21 @@
 .Option {
+  @include button;
+  min-width: 200px;
   position: relative;
-  min-width: 250px;
-  display: block;
-  padding: 1rem 5rem;
-  cursor: pointer;
-  background: $white;
-  color: $gray-dark;
-  left: 50%;
-  width: 200%;
-  max-width: 100%;
-  transform: translateX(-50%);
-  transition: max-width .05s ease-in-out;
 
-  &:hover {
-    background: $white;
-    color: $gray-dark;
-    max-width: calc(100% + 10px);
+  &:nth-child(1) {
+    transform: translate(-50%, -50%);
   }
 
-  & + li {
-    margin-top: 1rem;
+  &:nth-child(2) {
+    transform: translate(10%, 0);
+  }
+
+  &:nth-child(3) {
+    transform: translate(-50%, 50%);
+  }
+
+  &:nth-child(4) {
+    transform: translate(-110%, -200%);
   }
 }

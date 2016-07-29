@@ -16,11 +16,16 @@ export default class Timer extends Component {
   }
 
   componentDidMount() {
-    window.updateTimer = ::this.updateTimer;
+    window.thisTimer = this;
+    window.updateTimer = this.updateTimer;
+    window.startTimer = this.startTimer;
+  }
 
-    this.timeInterval = setInterval(function() {
-      this.countdown();
-    }.bind(this), 1000);
+  startTimer() {
+    let _this = window.thisTimer;
+    _this.timeInterval = setInterval(() => {
+      //_this.countdown();
+    }, 1000);
   }
 
   updateTimer() {
@@ -33,7 +38,10 @@ export default class Timer extends Component {
     if (this.state.count === 0) {
       clearInterval(this.timeInterval);
       window.showFinishScreen();
-      return;
+
+      setTimeout(() => {
+        window.allowRootContainerHeight();
+      }, 250);
     }
   }
 

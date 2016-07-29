@@ -1,90 +1,83 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 
-import { ARRAY } from 'app/utils/constants.js';
-import { getRandomIndex , hasClass } from 'app/utils/functions';
+import {ARRAY, SHOWNQUESTIONS} from 'app/utils/constants.js';
+import {getRandomIndex, hasClass} from 'app/utils/functions';
 import Option from 'app/components/Option';
 
 import styles from '../scss/styles.scss';
 
 export default class Question extends Component {
 
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      state : null,
-      options : {},
-      slideOffScreen : false
-    };
-  }
-
-  shuffle(a) {
-    for (let i = a.length; i; i -= 1) {
-        let j = Math.floor(Math.random() * i);
-        let x = a[i - 1];
-        a[i - 1] = a[j];
-        a[j] = x;
+        this.state = {
+            state: null,
+            options: {}
+        };
     }
-    return a;
-  }
 
-  generateOptions() {
+    shuffle(a) {
+        for (let i = a.length; i; i -= 1) {
+            let j = Math.floor(Math.random() * i);
+            let x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
+        }
+        return a;
+    }
 
-    // set the state
-    let rand = getRandomIndex();
+    generateOptions() {
 
-    this.setState({
-      state : ARRAY[rand][0]
-    })
+        let rand = getRandomIndex();
 
-    // grab the correct option to the state, to make sure it's in the list
-    let correctOption = [ARRAY[rand]];
+        if (SHOWNQUESTIONS.length < ARRAY.length) {
 
-    // make a copy of the array so we can do stuff to it
-    let cleanedArray = ARRAY.slice();
+            while (SHOWNQUESTIONS.indexOf(ARRAY[rand][0]) > -1) {
+                rand = getRandomIndex();
+            }
 
-    // remove the correct option as a possible other option
-    cleanedArray.splice(rand, 1);
+            // Grab the correct option to the state, to make sure it's in the list.
+            let correctOption = [ARRAY[rand]];
 
-    // set the other options by shuffling our array copy and getting three options
-    let otherOptions = this.shuffle(cleanedArray).slice(0, 3);
+            // Make a copy of the array so we can do stuff to it.
+            let cleanedArray = ARRAY.slice();
 
-    // add the correct option we saved earlier to the list to get our final set of options
-    let options = this.shuffle(correctOption.concat(otherOptions));
+            // Remove the correct option as a possible other option.
+            cleanedArray.splice(rand, 1);
 
-    this.setState({
-      options : options
-    });
-  }
+            // Set the other options by shuffling our array copy and getting three options.
+            let otherOptions = this.shuffle(cleanedArray).slice(0, 3);
 
-  onOptionClick(context) {
+            // Add the correct option we saved earlier to the list to get our final set of options.
+            let options = this.shuffle(correctOption.concat(otherOptions));
 
-    window.setActiveQuestion();
+            this.setState({state: ARRAY[rand][0], city: ARRAY[rand][1], options: options});
+        } else {
+            window.showFinishScreen();
+        }
+    }
 
-    // Next, update state to set question on other side of screen (to give appearance of new question sliding in)
-    setTimeout(() => {
-      context.generateOptions();
-    }, 250);
+    onOptionClick(context) {
+        context.generateOptions();
+    }
 
-  }
+    componentWillMount() {
+        this.generateOptions();
+    }
 
-  componentWillMount() {
-    this.generateOptions();
-  }
-
-  render() {
-
-    return (
-      <div className={classnames(styles.Question, this.props.className)}>
-        <h2>{this.state.state}</h2>
-        <ul>
-          {this.state.options.map(function(item) {
-            return <Option thisThing={this} onOptionClick={this.onOptionClick} questionState={this.state.state} optionState={item[0]} key={item[1]}>{item[1]}</Option>;
-          }.bind(this))}
-        </ul>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className={classnames(styles.Question, this.props.className)}>
+                <h2>{this.state.state}</h2>
+                <ul>
+                    {this.state.options.map(function(item) {
+                        return <Option thisThing={this} onOptionClick={this.onOptionClick} questionValue={this.state.state} optionValue={item[0]} optionCorrectAnswer={this.state.city} key={item[1]}>{item[1]}</Option>;
+                    }.bind(this))}
+                </ul>
+            </div>
+        );
+    }
 }

@@ -1,0 +1,17 @@
+@mixin button {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  background: $white;
+  color: $gray-dark;
+  padding: 1rem;
+  left: 50%;
+  width: auto;
+  transform: translateX(-50%);
+  transition: max-width .05s ease-in-out;
+
+  &:hover {
+    color: $gray-dark;
+    max-width: calc(100% + 10px);
+  }
+}
