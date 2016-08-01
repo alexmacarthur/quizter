@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
+import config from '../config.json';
 
 import styles from '../scss/styles.scss';
 
@@ -39,8 +40,8 @@ export default class WelcomeScreen extends Component {
     return(
       <div className={classNames(componentClass)}>
         <div className={classNames(styles.InnerContainer)}>
-          <h1 className={classNames(styles['WelcomeScreen-header'])}>Welcome!</h1>
-          <span className={classNames(styles['WelcomeScreen-instructions'])}>These are your instructions.</span>
+          <h1 className={classNames(styles['WelcomeScreen-header'])}>{config.welcome_header}</h1>
+          <span className={classNames(styles['WelcomeScreen-instructions'])}>{config.instructions}</span>
           <a className={classNames(styles['WelcomeScreen-button'])} onClick={this.startGame}>Start</a>
         </div>
       </div>

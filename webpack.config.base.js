@@ -36,12 +36,17 @@ var cssLoader = {
   loader: "style-loader!css-loader!postcss-loader"
 };
 
+var jsonLoader = {
+  test: /\.json$/,
+  loader: 'json'
+}
+
 var configuration = {
   entry: {
     app: 'src/index.js'
   },
   module: {
-    loaders: [babelLoader, scssLoader, cssLoader]
+    loaders: [babelLoader, scssLoader, cssLoader, jsonLoader]
   },
   postcss: function () {
     return [precss, autoprefixer];

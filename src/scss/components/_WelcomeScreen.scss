@@ -31,4 +31,6 @@
 
 .WelcomeScreen-button {
   @include button;
+  transform: none;
+  left: auto;
 }
