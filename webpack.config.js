@@ -42,9 +42,7 @@ var jsonLoader = {
 }
 
 var configuration = {
-  entry: {
-    app: 'src/index.js'
-  },
+  entry: path.resolve('src', 'index.jsx'),
   module: {
     loaders: [babelLoader, scssLoader, cssLoader, jsonLoader]
   },
@@ -52,7 +50,7 @@ var configuration = {
     return [precss, autoprefixer];
   },
   output: {
-    path: path.resolve('build'),
+    path: path.resolve('dist'),
     filename: 'app-[hash].js'
   },
   resolve: {

@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var baseConfig = require('./webpack.config.base');
+var baseConfig = require('./webpack.config');
 var config = Object.create(baseConfig);
 
 config.debug = true;
@@ -9,7 +9,7 @@ config.entry = [
   'webpack/hot/only-dev-server',
   'app/index'
 ];
-// config.output.publicPath = 'http://localhost:3000/build/';
+
 config.module.loaders.push({
   test: /\.global\.css$/,
   loaders: [
