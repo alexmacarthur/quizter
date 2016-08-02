@@ -10,7 +10,7 @@
   "keywords": [],
   "scripts": {
     "start": "node server.js",
-    "build": "webpack",
+    "build": "webpack && push-dir --dir=dist --branch=gh-pages",
     "watch:js": "onchange '*.js' -- npm run compile"
   },
   "devDependencies": {
@@ -34,6 +34,7 @@
     "postcss-cli": "^2.5.2",
     "postcss-loader": "^0.9.1",
     "precss": "^1.4.0",
+    "push-dir": "^0.2.2",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.5.1",
