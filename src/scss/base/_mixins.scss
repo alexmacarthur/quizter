@@ -2,17 +2,19 @@
   display: inline-block;
   position: relative;
   cursor: pointer;
-  background: $white;
-  color: $gray-dark;
+  color: $white;
   padding: 1rem;
   left: 50%;
   width: auto;
   min-width: 200px;
+  border-radius: 5px;
+  border: 3px solid $white;
   transform: translateX(-50%);
-  transition: max-width .05s ease-in-out;
+  transition: all .15s ease-in-out;
 
   &:hover {
     color: $gray-dark;
+    background: $white;
     max-width: calc(100% + 10px);
   }
 }
