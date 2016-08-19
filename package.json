@@ -10,7 +10,7 @@
   "keywords": [],
   "scripts": {
     "start": "node server.js",
-    "build": "webpack && push-dir --dir=dist --branch=gh-pages",
+    "build": "webpack && push-dir --dir=dist --branch=gh-pages --allow-unclean --cleanup",
     "watch:js": "onchange '*.js' -- npm run compile"
   },
   "devDependencies": {
